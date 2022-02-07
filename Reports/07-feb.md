@@ -63,3 +63,11 @@ this.
 I have recently realized I should be checking diagonally instead of everything to save massive time, and I will try to
 finish it still today before midnight. Usually I loop over the whole data since I would be accessing a database to find
 items where there would not be any discernible patterns such as this exercise provides.
+
+#### Update
+
+I was able to implement the diagonal checking, which is definitely faster. But not as fast as to attain the 3 second
+time. The logic chart: ![Logic chart](logic.png)
+
+I have a feeling that there might be some logic flaws as well somewhere, but I am not so sure how to improve these
+from this situation.

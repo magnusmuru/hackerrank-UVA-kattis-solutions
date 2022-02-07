@@ -74,46 +74,50 @@ class Main {
         List<String> output = new ArrayList<>();
 
         for (Problem test : Problems) {
-            Integer lowerBound = null;
             int maximum = 0;
-            int lowerBoundHeight = 0;
-            int lowerBoundWidth = 0;
-            int currentHeight = -1;
-            int currentWidth = -1;
             for (List<Integer> query : test.Queries) {
                 int upperBound = query.get(1);
-                for (List<Integer> row : test.Area) {
-                    currentHeight++;
-                    for (Integer number : row) {
-                        currentWidth++;
-                        if (lowerBound == null) {
-                            if (number >= query.get(0) && number <= upperBound) {
-                                lowerBound = number;
-                                lowerBoundHeight = currentHeight;
-                                lowerBoundWidth = currentWidth;
-                            }
-                        } else {
-                            int widthDiff = currentWidth - lowerBoundWidth + 1;
-                            int heightDiff = currentHeight - lowerBoundHeight + 1;
-                            if (heightDiff == widthDiff && widthDiff > maximum) {
-                                if (number >= lowerBound && number <= upperBound) {
-                                        maximum = currentWidth - lowerBoundWidth + 1;
-                                }
-                            }
 
+                areaLoop:
+                for (int height = 0; height < test.Area.size(); height++) {
+                    List<Integer> row = test.Area.get(height);
+
+                    for (int width = 0; width < row.size(); width++) {
+                        int number = row.get(width);
+                        if (number >= query.get(0) && number <= upperBound) {
+                            maximum++;
+                            int candidateHeight = height + 1;
+                            int candidateWidth = width + 1;
+
+                            outerLoop:
+                            while (test.Height - 1 >= candidateHeight && test.Width - 1 >= candidateWidth) {
+                                if (test.Area.get(candidateHeight).get(candidateWidth) <= upperBound) {
+                                    // potential candidate area.
+                                    for (int i = 1; i < candidateHeight - height + 1; i++) {
+                                        if (!(test.Area.get(candidateHeight - i).get(candidateWidth) <= upperBound)) {
+                                            break outerLoop;
+                                        }
+                                    }
+
+                                    for (int i = 1; i < candidateWidth - width + 1; i++) {
+                                        if (!(test.Area.get(candidateHeight).get(candidateWidth - i) <= upperBound)) {
+                                            break outerLoop;
+                                        }
+                                    }
+                                    candidateHeight++;
+                                    candidateWidth++;
+                                    maximum++;
+                                } else {
+                                    break;
+                                }
+
+                            }
+                            break areaLoop;
                         }
                     }
-                    currentWidth = -1;
                 }
-                if (lowerBound != null && maximum == 0 && lowerBound.equals(query.get(0))) {
-                    maximum = 1;
-                }
-                currentHeight = -1;
                 output.add(String.valueOf(maximum));
                 maximum = 0;
-                lowerBound = null;
-                lowerBoundHeight = 0;
-                lowerBoundWidth = 0;
             }
             output.add("-");
         }
