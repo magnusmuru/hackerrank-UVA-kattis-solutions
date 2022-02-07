@@ -54,10 +54,12 @@ list and add them to the new list. Simple 4 lines of code.
 ## Home exercises
 
 Out of the two exercises I picked UVA-12192 Grapevine. Currently, I got it to work with the example provided in the pdf
-but I am going over the 3s time limit. I first created a datastructures that would ingest and hold the problems that
+but I am going over the 3s time limit. I first created a data structure that would ingest and hold the problems that
 would come in with the solution. Took a while to figure out what was necessary to get the Runtime errors to stop in
 UVA (turns out its the public in Main). After that I just made a way to loop through the whole list of items and check
-for the largest boxes.
+for the largest boxes. This is causing the solution to run way too long, and I didn't have much idea how to optimize
+this.
 
 I have recently realized I should be checking diagonally instead of everything to save massive time, and I will try to
-finish it still today before midnight.
+finish it still today before midnight. Usually I loop over the whole data since I would be accessing a database to find
+items where there would not be any discernible patterns such as this exercise provides.
