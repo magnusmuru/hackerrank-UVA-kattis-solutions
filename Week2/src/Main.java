@@ -88,22 +88,9 @@ class Main {
                             maximum++;
                             int candidateHeight = height + 1;
                             int candidateWidth = width + 1;
-
-                            outerLoop:
+                            
                             while (test.Height - 1 >= candidateHeight && test.Width - 1 >= candidateWidth) {
                                 if (test.Area.get(candidateHeight).get(candidateWidth) <= upperBound) {
-                                    // potential candidate area.
-                                    for (int i = 1; i < candidateHeight - height + 1; i++) {
-                                        if (!(test.Area.get(candidateHeight - i).get(candidateWidth) <= upperBound)) {
-                                            break outerLoop;
-                                        }
-                                    }
-
-                                    for (int i = 1; i < candidateWidth - width + 1; i++) {
-                                        if (!(test.Area.get(candidateHeight).get(candidateWidth - i) <= upperBound)) {
-                                            break outerLoop;
-                                        }
-                                    }
                                     candidateHeight++;
                                     candidateWidth++;
                                     maximum++;
