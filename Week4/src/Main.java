@@ -21,9 +21,9 @@ class Main {
             priorityQueue.addAll(Arrays.stream((scanner.nextLine().split("\\s+"))).mapToInt(Integer::parseInt).boxed().collect(Collectors.toList()));
 
             while (scores > 0) {
-                int highest = priorityQueue.poll();
-                priorityQueue.add((int) Math.floor(highest / 2));
-                priorityQueue.add((int) Math.ceil(highest / 2));
+                double highest = priorityQueue.poll() / 2;
+                priorityQueue.add((int) Math.floor(highest));
+                priorityQueue.add((int) Math.ceil(highest));
                 scores -= 1;
             }
             out.append(String.valueOf(priorityQueue.peek())).append("\n");

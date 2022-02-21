@@ -7,15 +7,15 @@ int main() {
     while (scanf("%d %d", &p, &n) == 2) {
         static int A[200000];
 
-        int l = 1, maximum = 0;
+        int lower = 1, maximum = 0;
 
         for (int i = 0; i < n; i++) {
             scanf("%d", &A[i]);
             maximum = max(maximum, A[i]);
         }
         int output = 1;
-        while (l <= maximum) {
-            int average_value = (l + maximum) / 2;
+        while (lower <= maximum) {
+            int average_value = (lower + maximum) / 2;
             int check_sum = 0;
 
             for (int i = 0; i < n; i++)
@@ -24,7 +24,7 @@ int main() {
             if (check_sum <= p)
                 maximum = average_value - 1, output = average_value;
             else
-                l = average_value + 1;
+                lower = average_value + 1;
         }
         printf("%d\n", output);
     }
