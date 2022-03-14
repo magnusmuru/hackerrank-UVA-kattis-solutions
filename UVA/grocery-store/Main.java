@@ -1,6 +1,7 @@
 public class Main {
     public static void main(String[] args) {
         int largestPrice = (int) (2 * Math.pow(10, 9));
+
         for (int price1 = 1; price1 <= 2000; price1++) {
             if (Math.pow(price1, 4) > largestPrice) {
                 break;
